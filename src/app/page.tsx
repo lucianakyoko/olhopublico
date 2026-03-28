@@ -1,3 +1,4 @@
+import CtaSection from "../components/home/CtaSection";
 import FeaturedDeputies from "../components/home/FeaturedDeputies";
 import Hero from "../components/home/Hero";
 import LegislatureSummary from "../components/home/LegislatureSummary";
@@ -21,6 +22,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <CtaSection />
     </main>
   );
 }
