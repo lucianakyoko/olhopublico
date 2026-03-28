@@ -1,8 +1,8 @@
-import CtaSection from "../components/home/CtaSection";
-import FeaturedDeputies from "../components/home/FeaturedDeputies";
-import Hero from "../components/home/Hero";
-import LegislatureSummary from "../components/home/LegislatureSummary";
-import TodaySection from "../components/home/TodaySection";
+import CtaSection from "@/components/home/CtaSection";
+import FeaturedDeputies from "@/components/home/FeaturedDeputies";
+import Hero from "@/components/home/Hero";
+import LegislatureSummary from "@/components/home/LegislatureSummary";
+import TodaySection from "@/components/home/TodaySection";
 
 export default function Home() {
   return (
