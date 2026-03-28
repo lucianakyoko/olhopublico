@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { usePathname } from "next/navigation"
 import { useState } from "react";
+import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { label: 'Início', href: '/' },
@@ -16,6 +18,7 @@ const navItems = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return(
@@ -36,15 +39,21 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            {navItems.map((item) => (
-              <Link 
-                key={item.href}
-                href={item.href}
-                className="text-gray-600 hover:text-emerald-700 transition-colors duration-200"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link 
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "transition-colors duration-200",
+                    isActive ? "text-primary font-bold" : "text-gray-600 hover:text-primary"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
           </nav>
         
           <div className="hidden md:flex items-center gap-4">
@@ -76,16 +85,22 @@ export function Header() {
                 </Link>
 
                 <nav className="flex flex-col gap-6 text-lg">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="text-gray-700 hover:text-emerald-700 font-medium"
-                      onClick={() => setOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
+                  {navItems.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                          "font-medium",
+                          isActive ? "text-primary font-bold" : "text-gray-700 hover:text-primary"
+                        )}
+                        onClick={() => setOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    )
+                  })}
                 </nav>
                 <Button asChild className="mt-auto" onClick={() => setOpen(false)}>
                   <Link href="/auth/login">Entrar na minha conta</Link>
