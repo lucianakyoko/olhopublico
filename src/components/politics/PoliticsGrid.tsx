@@ -1,5 +1,3 @@
-// src/components/politicos/PoliticosGrid.tsx
-import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -13,128 +11,103 @@ interface Politico {
   presence: number;
   projects: number;
   house: 'Câmara' | 'Senado';
+  position?: string;
 }
 
-const mockPoliticos: Politico[] = [
-  {
-    id: '1',
-    name: 'Ricardo Oliveira da Silva',
-    party: 'PL',
-    state: 'SP',
-    photoUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-    presence: 94,
-    projects: 12,
-    house: 'Câmara',
-  },
-  {
-    id: '2',
-    name: 'Ana Beatriz Fernandes',
-    party: 'PT',
-    state: 'MG',
-    photoUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face',
-    presence: 88,
-    projects: 24,
-    house: 'Câmara',
-  },
-  {
-    id: '3',
-    name: 'Carlos Eduardo Mello',
-    party: 'UNIÃO',
-    state: 'RJ',
-    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-    presence: 91,
-    projects: 8,
-    house: 'Câmara',
-  },
-  {
-    id: '4',
-    name: 'Helena Marques',
-    party: 'PSOL',
-    state: 'RS',
-    photoUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-    presence: 98,
-    projects: 42,
-    house: 'Câmara',
-  },
-  {
-    id: '5',
-    name: 'Roberto Azevedo',
-    party: 'MDB',
-    state: 'BA',
-    photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face',
-    presence: 82,
-    projects: 15,
-    house: 'Câmara',
-  },
-  {
-    id: '6',
-    name: 'Julio César Rocha',
-    party: 'REDE',
-    state: 'PE',
-    photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face',
-    presence: 96,
-    projects: 31,
-    house: 'Câmara',
-  },
-];
+interface PoliticosGridProps {
+  politicos: Politico[];
+  title?: string;
+  count?: number;
+}
 
-export function PoliticsGrid() {
+export function PoliticsGrid({ 
+  politicos, 
+  title = "Representantes Federais",
+  count = 513 
+}: PoliticosGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {mockPoliticos.map((politico) => (
-        <Card key={politico.id} className="overflow-hidden hover:shadow-md transition-shadow group">
-          <CardContent className="p-6">
-            <div className="flex gap-4">
-              {/* Foto */}
-              <div className="relative w-20 h-20 flex-shrink-0">
-                <img
-                  src={politico.photoUrl}
-                  alt={politico.name}
-                  className="rounded-full object-cover ring-2 ring-gray-100"
-                />
-              </div>
+    <div>
+      {/* Cabeçalho da lista */}
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
+          <p className="text-gray-600 mt-1">
+            {count} {politicos[0]?.house === 'Senado' ? 'senadores' : 'deputados'} ativos.
+          </p>
+        </div>
 
-              {/* Informações */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <Badge variant="secondary" className="text-xs">
-                    {politico.party}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {politico.state}
-                  </Badge>
+        <div className="text-sm text-gray-500">
+          Mostrando {politicos.length} de {count}
+        </div>
+      </div>
+
+      {/* Grid de Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {politicos.map((politico) => (
+          <Card 
+            key={politico.id} 
+            className="overflow-hidden hover:shadow-md transition-all duration-200 group border border-gray-100"
+          >
+            <CardContent className="p-6">
+              <div className="flex gap-4">
+                {/* Foto */}
+                <div className="relative w-20 h-20 flex-shrink-0">
+                  <img
+                    src={politico.photoUrl}
+                    alt={politico.name}
+                    className="rounded-full object-cover ring-2 ring-gray-100"
+                  />
                 </div>
 
-                <h3 className="font-semibold text-base leading-tight mb-4 line-clamp-2 group-hover:text-emerald-700 transition-colors">
-                  {politico.name}
-                </h3>
+                {/* Informações */}
+                <div className="flex-1 min-w-0">
+                  {/* Badges de Partido e Estado */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary" className="text-xs font-medium">
+                      {politico.party}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {politico.state}
+                    </Badge>
+                  </div>
 
-                {/* Estatísticas */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-gray-500 text-xs">PRESENÇA</p>
-                    <p className="font-bold text-emerald-600 text-xl">{politico.presence}%</p>
+                  {/* Nome */}
+                  <h3 className="font-semibold text-base leading-tight mb-4 line-clamp-2 group-hover:text-emerald-700 transition-colors">
+                    {politico.name}
+                  </h3>
+
+                  {/* Estatísticas */}
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="text-gray-500 text-xs tracking-widest">PRESENÇA</p>
+                      <p className="font-bold text-emerald-600 text-2xl">
+                        {politico.presence}%
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500 text-xs tracking-widest">PROPOSIÇÕES</p>
+                      <p className="font-bold text-gray-900 text-2xl">
+                        {politico.projects.toString().padStart(2, '0')}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-gray-500 text-xs">PROPOSIÇÕES</p>
-                    <p className="font-bold text-gray-900 text-xl">{politico.projects}</p>
-                  </div>
+
+                  {/* Botão */}
+                  <Button 
+                    variant="outline" 
+                    className="w-full mt-6 text-sm font-medium"
+                    asChild
+                  >
+                    <a href={`/politico/${politico.id}`}>
+                      Ver Perfil Completo
+                    </a>
+                  </Button>
                 </div>
-
-                <Button 
-                  variant="outline" 
-                  className="w-full mt-6 text-sm font-medium"
-                  asChild
-                >
-                  <a href={`/politico/${politico.id}`}>
-                    Ver Perfil Completo
-                  </a>
-                </Button>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

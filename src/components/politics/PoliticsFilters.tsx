@@ -1,9 +1,15 @@
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-export function PoliticsFilters() {
+interface PoliticsFiltersProps {
+  selectedHouse: 'camara' | 'senado';
+  onHouseChange: (value: 'camara' | 'senado') => void;
+}
+
+export function PoliticsFilters({ selectedHouse, onHouseChange }: PoliticsFiltersProps) {
   return (
     <div className="bg-white p-6 rounded-2xl border border-gray-100 sticky top-24">
       <div className="flex items-center justify-between mb-6">
@@ -16,16 +22,24 @@ export function PoliticsFilters() {
       {/* Casa Legislativa */}
       <div className="mb-8">
         <p className="text-sm font-medium text-gray-500 mb-3">CASA LEGISLATIVA</p>
-        <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <Checkbox id="camara" defaultChecked />
-            <label htmlFor="camara" className="text-sm">Câmara dos Deputados</label>
+        <RadioGroup 
+          value={selectedHouse} 
+          onValueChange={(value) => onHouseChange(value as 'camara' | 'senado')}
+          className="space-y-3"
+        >
+          <div className="flex items-center gap-3">
+            <RadioGroupItem value="camara" id="camara" />
+            <Label htmlFor="camara" className="text-sm cursor-pointer">
+              Câmara dos Deputados
+            </Label>
           </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="senado" />
-            <label htmlFor="senado" className="text-sm">Senado Federal</label>
+          <div className="flex items-center gap-3">
+            <RadioGroupItem value="senado" id="senado" />
+            <Label htmlFor="senado" className="text-sm cursor-pointer">
+              Senado Federal
+            </Label>
           </div>
-        </div>
+        </RadioGroup>
       </div>
 
       {/* Estado */}
@@ -40,7 +54,8 @@ export function PoliticsFilters() {
             <SelectItem value="sp">São Paulo</SelectItem>
             <SelectItem value="rj">Rio de Janeiro</SelectItem>
             <SelectItem value="mg">Minas Gerais</SelectItem>
-            {/* ... mais estados */}
+            <SelectItem value="rs">Rio Grande do Sul</SelectItem>
+            <SelectItem value="ba">Bahia</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -49,10 +64,10 @@ export function PoliticsFilters() {
       <div className="mb-8">
         <p className="text-sm font-medium text-gray-500 mb-3">PARTIDO</p>
         <div className="space-y-3">
-          {['PT', 'PL', 'UNIÃO', 'PP', 'PSOL', 'MDB'].map((partido) => (
+          {['PT', 'PL', 'UNIÃO', 'PP', 'PSOL', 'MDB', 'REDE'].map((partido) => (
             <div key={partido} className="flex items-center gap-2">
-              <Checkbox id={partido} />
-              <label htmlFor={partido} className="text-sm">{partido}</label>
+              <input type="checkbox" id={partido} className="w-4 h-4" />
+              <label htmlFor={partido} className="text-sm cursor-pointer">{partido}</label>
             </div>
           ))}
         </div>
@@ -62,7 +77,7 @@ export function PoliticsFilters() {
       <div>
         <p className="text-sm font-medium text-gray-500 mb-3">PRESENÇA MÍNIMA</p>
         <div className="px-2">
-          <Slider defaultValue={[0]} max={100} step={5} />
+          <Slider defaultValue={[30]} max={100} step={5} />
           <div className="flex justify-between text-xs text-gray-500 mt-1">
             <span>0%</span>
             <span>100%</span>
