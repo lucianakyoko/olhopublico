@@ -22,25 +22,9 @@ interface PoliticosGridProps {
 
 export function PoliticsGrid({ 
   politicos, 
-  title = "Representantes Federais",
-  count = 513 
 }: PoliticosGridProps) {
   return (
     <div>
-      {/* Cabeçalho da lista */}
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
-          <p className="text-gray-600 mt-1">
-            {count} {politicos[0]?.house === 'Senado' ? 'senadores' : 'deputados'} ativos.
-          </p>
-        </div>
-
-        <div className="text-sm text-gray-500">
-          Mostrando {politicos.length} de {count}
-        </div>
-      </div>
-
       {/* Grid de Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {politicos.map((politico) => (
@@ -51,7 +35,7 @@ export function PoliticsGrid({
             <CardContent className="p-6">
               <div className="flex gap-4">
                 {/* Foto */}
-                <div className="relative w-20 h-20 flex-shrink-0">
+                <div className="relative w-20 h-20 shrink-0">
                   <img
                     src={politico.photoUrl}
                     alt={politico.name}
