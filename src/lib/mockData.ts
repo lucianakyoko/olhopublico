@@ -137,3 +137,70 @@ export const getAllPoliticos = () => [...mockDeputados, ...mockSenadores];
 export const getPoliticosByHouse = (house: 'Câmara' | 'Senado') => {
   return house === 'Câmara' ? mockDeputados : mockSenadores;
 };
+
+
+// ==================== MOCK DE PROPOSIÇÕES ====================
+export interface Proposicao {
+  id: string;
+  tipo: string;
+  numero: string;
+  ano: number;
+  titulo: string;
+  descricao: string;
+  tema: string;
+  casa: 'Câmara' | 'Senado';
+  status: 'Em Tramitação' | 'Aprovada' | 'Arquivada';
+  data: string;
+  autor: string;
+  autorCargo: string;
+  autorFoto?: string;
+}
+
+export const mockProposicoes: Proposicao[] = [
+  {
+    id: "p1",
+    tipo: "PL",
+    numero: "2630",
+    ano: 2020,
+    titulo: "Lei Brasileira de Liberdade, Responsabilidade e Transparência na Internet",
+    descricao: "Estabelece normas, diretrizes e mecanismos de transparência para provedores de redes sociais e de serviços de mensageria privada.",
+    tema: "Direitos Digitais",
+    casa: "Câmara",
+    status: "Em Tramitação",
+    data: "24 Mai 2024",
+    autor: "Sen. Alessandro Vieira",
+    autorCargo: "Senador",
+  },
+  {
+    id: "p2",
+    tipo: "PEC",
+    numero: "45",
+    ano: 2019,
+    titulo: "Reforma do Sistema Tributário Nacional",
+    descricao: "Altera o Sistema Tributário Nacional para simplificar a cobrança de impostos sobre o consumo, unificando diversos tributos em um Imposto sobre Bens e Serviços (IBS).",
+    tema: "Tributário",
+    casa: "Senado",
+    status: "Aprovada",
+    data: "15 Mai 2024",
+    autor: "Dep. Baleia Rossi",
+    autorCargo: "Deputado Federal",
+  },
+  {
+    id: "p3",
+    tipo: "PL",
+    numero: "4162",
+    ano: 2019,
+    titulo: "Novo Marco Legal do Saneamento Básico",
+    descricao: "Aprimora as condições estruturais do saneamento básico no Brasil, facilitando a entrada de investimentos privados e definindo metas de universalização até 2033.",
+    tema: "Saneamento",
+    casa: "Câmara",
+    status: "Arquivada",
+    data: "10 Mai 2024",
+    autor: "Sen. Tasso Jereissati",
+    autorCargo: "Senador",
+  },
+];
+
+export const getProposicoesByCasa = (casa: 'Câmara' | 'Senado') => {
+  return mockProposicoes.filter(p => p.casa === casa);
+};
