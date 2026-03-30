@@ -82,7 +82,7 @@ export function PoliticsGrid({
                     className="w-full mt-6 text-sm font-medium"
                     asChild
                   >
-                    <a href={`/politico/${politico.id}`}>
+                    <a href={`/politicos/${politico.id}`}>
                       Ver Perfil Completo
                     </a>
                   </Button>

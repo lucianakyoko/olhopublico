@@ -87,7 +87,7 @@ export function PoliticsTable({
 
                 <TableCell className="text-right">
                   <Button variant="outline" size="sm" asChild>
-                    <a href={`/politico/${politico.id}`}>
+                    <a href={`/politicos/${politico.id}`}>
                       Ver Perfil
                     </a>
                   </Button>
