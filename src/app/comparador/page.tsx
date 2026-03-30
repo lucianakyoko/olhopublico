@@ -1,5 +1,6 @@
-import { useState } from 'react';
+'use client'
 
+import { useState } from 'react';
 import { mockDeputados, mockSenadores } from '@/lib/mockData';
 import ComparatorHeader from '@/components/comparator/ComparatorHeader';
 import PoliticianSelector, { Politician } from '@/components/comparator/PoliticianSelector';
