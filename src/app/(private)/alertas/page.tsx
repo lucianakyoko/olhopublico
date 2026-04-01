@@ -6,7 +6,6 @@ import CreateAlertForm from '@/components/alerts/CreateAlertForm';
 import ActiveAlerts from '@/components/alerts/ActiveAlerts';
 import RecentHistory from '@/components/alerts/RecentHistory';
 
-
 export default function AlertsPage() {
   const [activeAlertsCount] = useState(12);
   const [notificationsCount] = useState(84);

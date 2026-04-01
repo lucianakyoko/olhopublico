@@ -11,6 +11,7 @@ import PoliticianProposals from '@/components/politician/PoliticianProposals';
 import PoliticianCharts from '@/components/politician/PoliticianCharts';
 import PoliticianSpeeches from '@/components/politician/PoliticianSpeeches';
 import PoliticianAttendance from '@/components/politician/PoliticianAttendance';
+import PoliticianExpenses from '@/components/politician/PoliticianExpenses';
 
 interface PoliticianPageProps {
   params: Promise<{ id: string }>;
@@ -22,7 +23,7 @@ export default function PoliticianPage({ params }: PoliticianPageProps) {
   const allPoliticians = [...mockDeputados, ...mockSenadores];
   const politician = allPoliticians.find(p => p.id === id);
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'proposals' | 'votes' | 'attendance' | 'speeches' | 'charts'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'proposals' | 'votes' | 'attendance' | 'speeches' | 'charts' | 'expenses'>('overview');
 
   if (!politician) {
     return (
@@ -45,7 +46,8 @@ export default function PoliticianPage({ params }: PoliticianPageProps) {
           {activeTab === 'votes' && <PoliticianVotes />}
           {activeTab === 'attendance' && <PoliticianAttendance />}
           {activeTab === 'speeches' && <div><PoliticianSpeeches /></div>}
-          {activeTab === 'charts' && <div><PoliticianCharts /></div>}
+          {activeTab === 'charts' && <PoliticianCharts politician={politician} />}
+          {activeTab === 'expenses' && <PoliticianExpenses politician={politician} />}
         </div>
       </div>
     </div>

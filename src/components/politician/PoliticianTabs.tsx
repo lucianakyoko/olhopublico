@@ -4,7 +4,8 @@ type TabId =
   | 'votes'
   | 'attendance'
   | 'speeches'
-  | 'charts';
+  | 'charts'
+  | 'expenses';
 
 const tabs: {id: TabId; label: string}[] = [
   { id: 'overview', label: 'Visão Geral' },
@@ -12,13 +13,14 @@ const tabs: {id: TabId; label: string}[] = [
   { id: 'votes', label: 'Votações' },
   { id: 'attendance', label: 'Presença' },
   { id: 'speeches', label: 'Discursos' },
-  { id: 'charts', label: 'gráficos' },
+  { id: 'charts', label: 'Gráficos' },
+  { id: 'expenses', label: 'Gastos' }
 ];
 
 
 interface PoliticianTabsProps {
   activeTab: string;
-  onTabChange: (tab: 'overview' | 'proposals' | 'votes' | 'attendance' | 'speeches' | 'charts') => void;
+  onTabChange: (tab: 'overview' | 'proposals' | 'votes' | 'attendance' | 'speeches' | 'charts' | 'expenses') => void;
 }
 
 export default function PoliticianTabs({ activeTab, onTabChange }: PoliticianTabsProps) {
