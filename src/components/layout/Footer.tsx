@@ -40,9 +40,9 @@ export default function Footer() {
           <div className="md:col-span-4">
             <h4 className="text-white font-semibold mb-4">Institucional</h4>
             <div className="flex flex-col gap-3 text-sm">
-              <Link href="/sobre" className="hover:text-white transition-colors">Sobre o Projeto</Link>
+              <Link href="/sobre-projeto" className="hover:text-white transition-colors">Sobre o Projeto</Link>
               <Link href="/glossario" className="hover:text-white transition-colors">Glossário Legislativo</Link>
-              <Link href="/termos" className="hover:text-white transition-colors">Termos de Uso</Link>
+              <Link href="/termos-uso" className="hover:text-white transition-colors">Termos de Uso</Link>
               <Link href="/privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>
             </div>
           </div>
